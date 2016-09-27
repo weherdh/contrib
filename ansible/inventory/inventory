@@ -1,0 +1,11 @@
+
+
+[masters]
+weku.eastus.cloudapp.azure.com
+
+[etcd:children]
+masters
+
+[nodes]
+weku.eastus.cloudapp.azure.com
+weku.eastus.cloudapp.azure.com

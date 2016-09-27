@@ -4,7 +4,7 @@
 #
 # localBuild - requires make release to have been run to build local binaries
 # packageManager - will install packages from your distribution using yum/dnf/apt
-source_type: packageManager
+source_type: localBuild 
 
 # will be used as the Internal dns domain name if DNS is enabled. Services
 # will be discoverable under <service-name>.<namespace>.svc.<domainname>, e.g.
@@ -14,7 +14,7 @@ cluster_name: cluster.local
 # Account name of remote user. Ansible will use this user account to ssh into
 # the managed machines. The user must be able to use sudo without asking
 # for password unless ansible_sudo_pass is set
-#ansible_ssh_user: root
+ansible_ssh_user: root
 
 # password for the ansible_ssh_user. If this is unset you will need to set up
 # ssh keys so a password is not needed.
@@ -58,7 +58,7 @@ networking: flannel
 # Flannel internal network (optional). When flannel is used, it will assign IP
 # addresses from this range to individual pods.
 # This network must be unused in your network infrastructure!
-flannel_subnet: 172.16.0.0
+flannel_subnet: 192.18.0.0
 
 # Flannel internal network total size (optional). This is the prefix of the
 # entire flannel overlay network.  So the entirety of 172.16.0.0/12 must be
@@ -98,4 +98,6 @@ dns_replicas: 1
 # with caution.
 
 # See kube documentation for apiserver runtime config options.  Example below enables HPA, deployments features.
-# apiserver_extra_args: "--runtime-config=extensions/v1beta1/deployments=true"
+apiserver_extra_args: "--cloud-provider=azure --cloud-config=/etc/cloud.conf"
+conroller_extra_args: "--cloud-provider=azure --cloud-config=/etc/cloud.conf"
+kubelet_extra_args: "--cloud-provider=azure --cloud-config=/etc/cloud.conf"
